@@ -1,4 +1,4 @@
-%%Aplicação de um algoritmo LMS
+%%Aplicaï¿½ï¿½o de um algoritmo LMS
 
 clear()
 N =  5000; %comprimento do sinal(amostras)
@@ -7,43 +7,43 @@ n = 0:1:N;
 %%Sinal de referencia
 f = 0.005; %Hz
 theta = 0; %fase
-arg = (2.*pi.*f*n - theta); % argumento da função do sinal
+arg = (2.*pi.*f*n - theta); % argumento da funï¿½ï¿½o do sinal
 signal = sin(arg);
 
 
 L = 15; % numero de coeficientes
 wreal = randn(1,L);
 
-%%Gerando sinal de ruído puro
+%%Gerando sinal de ruido puro
 anoise = randn(1,N);
 
-%%Gerando ruído para sinal de entrada
+%%Gerando ruido para sinal de entrada
 anoise_input = conv(anoise,wreal);
 
 %%sinal de entrada
 d = (signal + anoise_input(1:1:length(signal)));
 
-%%criação do vetor W de coeficientes do filtro
+%%criaï¿½ï¿½o do vetor W de coeficientes do filtro
 w(1,:) = zeros(1,L);
 u = 0.005; %-> coeficiente mi
 
-%% condições iniciais 0, para implementação do algoritimo
+%% condiï¿½ï¿½es iniciais 0, para implementaï¿½ï¿½o do algoritimo
 anoise = [zeros(1,L-1) anoise];
 
 %%%%  INICIANDO O ALGORITIMO LMS  %%%%%%%%
-output = zeros(1,N); %vetor para saída Y(n)
+output = zeros(1,N); %vetor para saï¿½da Y(n)
  
- for i=1:N %mover o contador para começar no sinal de entrada d(n) e
-           %pular as condições iniciais
+ for i=1:N %mover o contador para comeï¿½ar no sinal de entrada d(n) e
+           %pular as condiï¿½ï¿½es iniciais
              
    j =i+L-1;
-   %realiza a convolução dos coeficientes com o sinal de ruído puro para obter
-   % o ruído de aprox. à entrada e subtrai para obter a saída Y(n)
+   %realiza a convoluï¿½ï¿½o dos coeficientes com o sinal de ruï¿½do puro para obter
+   % o ruï¿½do de aprox. ï¿½ entrada e subtrai para obter a saï¿½da Y(n)
    
    aux = anoise(i:1:j)';
-   anoise_input(i) = w(i,:)*aux; %convolucão
-   output(i) = d(i) - anoise_input(i); %sinal de saída
-   w(i+1,:) = w(i,:) + u.*anoise(i:j).*output(i); %atualização de coeficientes
+   anoise_input(i) = w(i,:)*aux; %convolucï¿½o
+   output(i) = d(i) - anoise_input(i); %sinal de saï¿½da
+   w(i+1,:) = w(i,:) + u.*anoise(i:j).*output(i); %atualizaï¿½ï¿½o de coeficientes
  endfor
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 subplot(311)

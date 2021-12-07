@@ -5,6 +5,7 @@ import matplotlib.pylab as plt
 import padasip as pa 
 
 # gerando informações
+N = 1000
 signal = np.random.normal(0, 1, (N, 10)) # matriz de entrada
 noise_in = np.random.normal(0, 0.1, N) # ruído
 d = 2*signal[:,0] + 0.1*signal[:,1] - 4*signal[:,2] + 0.5*signal[:,3] + noise_in # sinal desejado

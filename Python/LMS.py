@@ -11,6 +11,7 @@ noise_in = np.random.normal(0, 0.1, N) # ruído
 d = 2*signal[:,0] + 0.1*signal[:,1] - 4*signal[:,2] + 0.5*signal[:,3] + noise_in # sinal desejado
 # identificação
 f = pa.filters.FilterLMS(n=10, mu = 0.1, w = "random")
+
 y, e, w = f.run(d, signal)
 
 # resultados

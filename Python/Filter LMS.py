@@ -73,5 +73,6 @@ plt.xlabel("Amostras - k")
 
 
 plt.tight_layout()
+plt.tight_layout()
 plt.show()
 

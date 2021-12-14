@@ -11,6 +11,15 @@ def returnFunction(x, v):
     return d
 
 def LMS_Filter(d, x):
+    """
+    LMS Algorithm 
+    parametro d: sinal alvo de entrada com adição de ruído
+    parametro x: matriz de valores aleatórios ...
+
+    retorna y: Sinal de saída 
+    retorna e: erro
+    returna W: coeficientes atualizados
+    """
 
     N = len(x)
     #tratativa de exceções
@@ -30,21 +39,21 @@ def LMS_Filter(d, x):
     y = np.zeros(N)
     e = np.zeros(N)
     
-    W_history = np.zeros((N, n)) # coeficientes de W
+    W = np.zeros((N, n)) # coeficientes de W
     
     #Wcoef = np.random.normal(0, 0.5, n) 
     Wcoef = np.zeros(n) 
     
-    # Algotitmo LMS
+    ###### Algotitmo LMS #######
     for k in range(N):
 
-        W_history[k,:] = Wcoef
+        W[k,:] = Wcoef
         y[k] = np.dot(Wcoef, x[k])
         e[k] = d[k] - y[k]
         dw = mi * e[k] * x[k]
         Wcoef += dw
 
-    return y, e, W_history
+    return y, e, W # sinal filtrado, erro e coeficientes 
 
 # Dados de entrada
 N = 1000

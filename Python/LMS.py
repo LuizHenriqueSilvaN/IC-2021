@@ -2,15 +2,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def returnFunction(x, v):
-    d = 2*x[:, 0] + v  # target
+    """
+    Função responsávelpor retornar um sinal de valores reais com adição de ruídos
+    parametro x: matrix de valores aleatórios
+    parametro v: sinal ruido
+    """
+    d = 2*x[:, 0] + v  # sinal desejado
     return d
 
 def LMS_Filter(d, x):
 
     N = len(x)
-    
+    #tratativa de exceções
     if not len(d) == N:
-        raise ValueError('The length of vector d and matrix x must agree.')
+        raise ValueError('O tamanho do vetor d e da matrix X devem concordar')
     
     n = len(x[0])
 
@@ -19,9 +24,9 @@ def LMS_Filter(d, x):
         d = np.array(d) 
 
     except:
-        raise ValueError('Impossible to convert x or d to a numpy array')
+        raise ValueError('Impossível converter x ou d para um array numpy')
 
-    # create empty arrays
+    # Matrizes vazias
     y = np.zeros(N)
     e = np.zeros(N)
     
@@ -30,7 +35,7 @@ def LMS_Filter(d, x):
     #Wcoef = np.random.normal(0, 0.5, n) 
     Wcoef = np.zeros(n) 
     
-    # adaptation loop
+    # Algotitmo LMS
     for k in range(N):
 
         W_history[k,:] = Wcoef
@@ -50,6 +55,7 @@ d = returnFunction(x, v)
 
 yout, erro, w = LMS_Filter(d, x)
 
+# plotagem
 plt.figure(figsize = (15,9))
 plt.subplot(311)
 plt.plot(d,'black', linewidth=(1.5), label = "d - Sinal desejado")
